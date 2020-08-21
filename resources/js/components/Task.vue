@@ -17,9 +17,15 @@
                                 <img class="card-img-top" :src="'storage/' + task.image" alt="Card image cap">
                                 <div class="card-body">
                                     <p class="card-text">{{task.description}}</p>
-                                    <div class="d-flex justify-content-between align-items-center">
+                                    <google-map
+                                        :lon="task.lon"
+                                        :lat="task.lat"
+                                        v-if="task.lat"
+                                    >
+                                    </google-map>
+                                    <div class="d-flex justify-content-between align-items-center mt-4">
 <!--                                            <button type="button" class="btn btn-lg btn-outline-danger" @click="">Выполнять</button>-->
-                                            <a type="button" class="btn btn-lg btn-outline-success btn-block" href="response">Отправить ответ</a>
+                                            <a type="button" class="btn btn-lg btn-outline-success btn-block" v-if="task.priority < count" href="response">Отправить ответ</a>
                                     </div>
                                 </div>
                             </div>
@@ -35,7 +41,7 @@
 <script>
 export default {
     name: "Task",
-    props: ['task'],
+    props: ['task', 'count'],
     data() {
         return {
         }

@@ -14,8 +14,7 @@ class QuestSeeder extends Seeder
     {
         Quest::create([
             'main_title' => 'Quest',
-            'top_title' => 'Top Title',
-            'top_content' => 'Content for top section. This text will be changed in future',
+            'image' => '___',
             'bottom_title' => 'Bottom Title',
             'bottom_content' => 'There should be detailed information about the game, its rules, etc.'
         ]);

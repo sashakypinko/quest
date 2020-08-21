@@ -29,7 +29,8 @@ class TaskController extends Controller
         }
 
         return view('task.index', [
-            'task' => $task
+            'task' => $task,
+            'count' => $this->task->getTasksCount()
         ]);
     }
 }

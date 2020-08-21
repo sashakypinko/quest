@@ -5,6 +5,7 @@
     <div>
         <task
             :task='@json($task)'
+            :count='@json($count)'
         ></task>
     </div>
 

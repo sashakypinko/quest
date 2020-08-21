@@ -32,7 +32,7 @@
             </div>
             <hr class="mb-4">
             <button class="btn btn-primary btn-lg btn-block" @click="send" v-if="!success">Отправить ответ</button>
-            <a class="btn btn-success btn-lg btn-block" href="/" v-if="success">Следующее задание</a>
+            <a class="btn btn-success btn-lg btn-block" href="/task" v-if="success">Следующее задание</a>
         </div>
     </div>
 </template>

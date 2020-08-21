@@ -19,6 +19,8 @@ class CreateTasksTable extends Migration
             $table->text('description')->nullable();
             $table->string('image')->nullable();
             $table->bigInteger('priority')->unsigned()->default(1);
+            $table->string('lon')->nullable();
+            $table->string('lat')->nullable();
 
             $table->timestamps();
         });

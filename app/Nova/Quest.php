@@ -13,21 +13,21 @@ use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 
-class Task extends Resource
+class Quest extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Task::class;
+    public static $model = \App\Models\Quest::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'title';
+    public static $title = 'main_title';
 
     /**
      * The columns that should be searched.
@@ -35,7 +35,7 @@ class Task extends Resource
      * @var array
      */
     public static $search = [
-        'title', 'description'
+        'main_title'
     ];
 
     /**
@@ -58,24 +58,21 @@ class Task extends Resource
         return [
             ID::make()->sortable(),
 
-            Text::make(__('Title'), 'title')
+            Text::make(__('Title'), 'main_title')
                 ->sortable()
                 ->rules('required', 'max:255'),
-
-            Textarea::make(__('Description'), 'description')
-                ->sortable()
-                ->rules('required'),
 
             Image::make(__('Image'), 'image')
                 ->disk('public')->path((new Model)->getFilePath()),
 
-            Number::make(__('Priority'), 'priority')
+            Text::make(__('Second Section Title'), 'bottom_title')
                 ->sortable()
-            ->rules('required'),
+                ->rules('required', 'max:255'),
 
-            Text::make(__('Latitude'), 'lat'),
+            Textarea::make(__('Second Section Content'), 'bottom_content')
+                ->sortable()
+                ->rules('required')
 
-            Text::make(__('Longitude'), 'lon'),
         ];
     }
 

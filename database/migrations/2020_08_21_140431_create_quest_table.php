@@ -17,8 +17,7 @@ class CreateQuestTable extends Migration
             $table->id();
             $table->string('main_title');
 
-            $table->string('top_title');
-            $table->text('top_content');
+            $table->string('image');
 
             $table->string('bottom_title');
             $table->text('bottom_content');

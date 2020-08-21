@@ -24,4 +24,12 @@ class Task extends BaseModel
     {
         return $this->where('priority', Auth::user()->current_task)->first();
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTasksCount()
+    {
+        return $this->count();
+    }
 }
