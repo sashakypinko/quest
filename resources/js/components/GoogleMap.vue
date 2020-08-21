@@ -1,5 +1,6 @@
 <template>
-    <div class="App"/>
+    <div class="App">
+    </div>
 </template>
 
 <script>
@@ -39,7 +40,20 @@
             },
         },
         async mounted() {
-            this.ipLookUp();
+            let self = this;
+
+            if ('geolocation' in navigator) {
+                navigator.geolocation.getCurrentPosition(function success(r) {
+                    self.myLat = r.coords.latitude;
+                    self.myLon = r.coords.longitude;
+
+                }, function error(error_message) {
+                    console.error('An error has occured while retrieving location', error_message);
+                    self.ipLookUp();
+                });
+            } else {
+                self.ipLookUp();
+            }
 
             try {
                 const google = await gmapsInit();
