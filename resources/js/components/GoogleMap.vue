@@ -59,7 +59,7 @@
                 const google = await gmapsInit();
                 const map = new google.maps.Map(this.$el, {
                     zoom: 11,
-                    center: new google.maps.LatLng(this.myLat, this.myLon)
+                    center: new google.maps.LatLng(this.latitude, this.longitude)
                 });
 
                 let marker = new google.maps.Marker({
