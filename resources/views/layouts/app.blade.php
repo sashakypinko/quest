@@ -79,7 +79,7 @@
         </div>
     </nav>
 
-    <div class="layout" id="app" style="min-height: 75vh">
+    <div class="layout" id="app" style="min-height: 70vh">
         @yield('content')
     </div>
     @component('layouts.footer')@endcomponent

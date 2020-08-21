@@ -9,86 +9,68 @@
         props: ['lon', 'lat'],
         data() {
             return {
-                center: {lat: this.lat, lng: this.lon},
                 markers: [],
                 places: [],
+                key: 'AIzaSyClropSipck2WokfsQMiNoNuSWFMaLJcV0',
                 currentPlace: null,
                 longitude: parseFloat(this.lon),
-                latitude: parseFloat(this.lat)
+                latitude: parseFloat(this.lat),
+                myLat: '',
+                myLon: ''
             };
         },
         methods: {
-            handleLocationError(browserHasGeolocation, infoWindow, pos, map) {
-                infoWindow.setPosition(pos);
-                infoWindow.setContent(browserHasGeolocation ?
-                    'Error: The Geolocation service failed.' :
-                    'Error: Your browser doesn\'t support geolocation.');
-                infoWindow.open(map);
-            }
+            ipLookUp(callback) {
+                let self = this;
+
+                $.ajax({
+                    url: 'https://www.googleapis.com/geolocation/v1/geolocate?key=' + this.key,
+                    type: 'POST',
+                    success: r => {
+                        self.myLat = r.location.lat;
+                        self.myLon = r.location.lng;
+                    },
+                    fail: (data, status) => {
+                        if (callback) {
+                            callback();
+                        }
+                    }
+                });
+            },
         },
         async mounted() {
+            this.ipLookUp();
+
             try {
                 const google = await gmapsInit();
-                const geocoder = new google.maps.Geocoder();
-                const map = new google.maps.Map(this.$el);
-                let infoWindow = new google.maps.InfoWindow;
+                const map = new google.maps.Map(this.$el, {
+                    zoom: 11,
+                    center: new google.maps.LatLng(this.myLat, this.myLon)
+                });
+
                 let marker = new google.maps.Marker({
                     map: map,
-                    draggable: true,
+                    draggable: false,
                     animation: google.maps.Animation.DROP,
                     position: {lat: this.latitude, lng: this.longitude}
                 });
 
-                marker.setAnimation(google.maps.Animation.BOUNCE);
-
-                geocoder.geocode({address: this.latitude + ', ' + this.longitude}, (results, status) => {
-                    if (status !== 'OK' || !results[0]) {
-                        throw new Error(status);
-                    }
-                    map.setCenter(results[0].geometry.location);
-                    map.fitBounds(results[0].geometry.viewport);
+                let myloc = new google.maps.Marker({
+                    clickable: false,
+                    icon: new google.maps.MarkerImage('//maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',
+                        new google.maps.Size(22,22),
+                        new google.maps.Point(0,18),
+                        new google.maps.Point(11,11)),
+                    shadow: null,
+                    animation: google.maps.Animation.DROP,
+                    zIndex: 999,
+                    map: map,
+                    position: {lat: this.myLat, lng: this.myLon}
                 });
 
-                let self = this;
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    var pos = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    };
-
-                    infoWindow.setPosition(pos);
-                    infoWindow.setContent('Location found.');
-                    infoWindow.open(map);
-                    map.setCenter(pos);
-                }, function () {
-                    self.handleLocationError(true, infoWindow, map.getCenter(), map);
-                });
             } catch (error) {
                 console.error(error);
             }
-
-            // let infoWindow = new google.maps.InfoWindow;
-            //
-            // // Try HTML5 geolocation.
-            // if (navigator.geolocation) {
-            //     let self = this;
-            //     navigator.geolocation.getCurrentPosition(function (position) {
-            //         var pos = {
-            //             lat: position.coords.latitude,
-            //             lng: position.coords.longitude
-            //         };
-            //
-            //         infoWindow.setPosition(pos);
-            //         infoWindow.setContent('Location found.');
-            //         infoWindow.open(map);
-            //         map.setCenter(pos);
-            //     }, function () {
-            //         self.handleLocationError(true, infoWindow, map.getCenter());
-            //     });
-            // } else {
-            //     // Browser doesn't support Geolocation
-            //     this.handleLocationError(false, infoWindow, map.getCenter());
-            // }
         }
     }
 </script>

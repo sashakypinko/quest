@@ -15,8 +15,8 @@ class QuestSeeder extends Seeder
         Quest::create([
             'main_title' => 'Quest',
             'image' => '___',
-            'bottom_title' => 'Bottom Title',
-            'bottom_content' => 'There should be detailed information about the game, its rules, etc.'
+            'bottom_title' => 'Здесь будет название квэста',
+            'bottom_content' => 'Здесь будет описание квэста, правила игры и т.д. Фотку высше если что, можно будет поменять, это я так, для примера поставил.'
         ]);
     }
 }
