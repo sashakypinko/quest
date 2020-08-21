@@ -44,7 +44,7 @@ class User extends Authenticatable
     public function setNextTask()
     {
         $user = $this->find(Auth::user()->id);
-        $user->current_task = ++ $user->current_task;
+        $user->current_task = ++$user->current_task;
         return $user->save();
     }
 }

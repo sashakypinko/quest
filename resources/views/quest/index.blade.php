@@ -3,9 +3,9 @@
 @section('content')
 
     <div>
-        <quest-page
-            :task='@json($task)'
-        ></quest-page>
+        <quest
+            :data='@json($quest)'
+        ></quest>
     </div>
 
 @endsection

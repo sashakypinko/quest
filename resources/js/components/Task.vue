@@ -18,8 +18,8 @@
                                 <div class="card-body">
                                     <p class="card-text">{{task.description}}</p>
                                     <div class="d-flex justify-content-between align-items-center">
-                                            <button type="button" class="btn btn-lg btn-outline-danger" @click="">Выполнять</button>
-                                            <a type="button" class="btn btn-lg btn-outline-success" href="response">Отправить ответ</a>
+<!--                                            <button type="button" class="btn btn-lg btn-outline-danger" @click="">Выполнять</button>-->
+                                            <a type="button" class="btn btn-lg btn-outline-success btn-block" href="response">Отправить ответ</a>
                                     </div>
                                 </div>
                             </div>
@@ -34,7 +34,7 @@
 
 <script>
 export default {
-    name: "QuestPage",
+    name: "Task",
     props: ['task'],
     data() {
         return {

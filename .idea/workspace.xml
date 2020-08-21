@@ -19,6 +19,16 @@
     </option>
   </component>
   <component name="PhpDebugGeneral" listening_started="true" />
+  <component name="PhpServers">
+    <servers>
+      <server host="persona-local.com" id="21e5af04-5d16-4851-85ef-f116b150e527" name="persona-local.com" port="443" use_path_mappings="true">
+        <path_mappings>
+          <mapping local-root="$PROJECT_DIR$/public" remote-root="/var/www/persona.loc/public" />
+        </path_mappings>
+      </server>
+      <server host="quest" id="041e4efb-699d-49a3-a2a2-7792de13d809" name="quest" />
+    </servers>
+  </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/phpspec/prophecy" />
@@ -146,10 +156,18 @@
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/config" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/task" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/config" />
       <recent name="$PROJECT_DIR$/app/Traits" />
@@ -173,7 +191,7 @@
       <option name="presentableId" value="Default" />
       <updated>1597912642898</updated>
       <workItem from="1597912643956" duration="16161000" />
-      <workItem from="1597987181244" duration="5425000" />
+      <workItem from="1597987181244" duration="11971000" />
     </task>
     <servers />
   </component>
@@ -189,21 +207,36 @@
       <screen x="0" y="0" width="1920" height="1049" />
     </state>
     <state x="666" y="0" width="580" height="1046" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1049@0.0.1920.1049" timestamp="1597913805699" />
-    <state x="693" y="284" width="530" height="481" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1597916272692">
+    <state x="693" y="284" width="530" height="481" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1598016749557">
       <screen x="0" y="0" width="1920" height="1049" />
     </state>
-    <state x="693" y="284" width="530" height="481" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1049@0.0.1920.1049" timestamp="1597916272692" />
+    <state x="693" y="284" width="530" height="481" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1049@0.0.1920.1049" timestamp="1598016749557" />
     <state x="788" y="255" width="339" height="539" key="NewPhpClassDialog" timestamp="1597915155580">
       <screen x="0" y="0" width="1920" height="1049" />
     </state>
     <state x="788" y="255" width="339" height="539" key="NewPhpClassDialog/0.0.1920.1049@0.0.1920.1049" timestamp="1597915155580" />
-    <state x="778" y="452" width="360" height="144" key="NewPhpFileDialog" timestamp="1597927495359">
+    <state x="778" y="452" width="360" height="144" key="NewPhpFileDialog" timestamp="1598016922621">
       <screen x="0" y="0" width="1920" height="1049" />
     </state>
-    <state x="778" y="452" width="360" height="144" key="NewPhpFileDialog/0.0.1920.1049@0.0.1920.1049" timestamp="1597927495359" />
+    <state x="778" y="452" width="360" height="144" key="NewPhpFileDialog/0.0.1920.1049@0.0.1920.1049" timestamp="1598016922621" />
     <state x="837" y="374" width="332" height="300" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1597990469722">
       <screen x="0" y="0" width="1920" height="1049" />
     </state>
     <state x="837" y="374" width="332" height="300" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1920.1049@0.0.1920.1049" timestamp="1597990469722" />
+    <state x="666" y="275" width="587" height="502" key="find.popup" timestamp="1597997759799">
+      <screen x="0" y="0" width="1920" height="1049" />
+    </state>
+    <state x="666" y="275" width="587" height="502" key="find.popup/0.0.1920.1049@0.0.1920.1049" timestamp="1597997759799" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/TaskController.php</url>
+          <line>26</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
