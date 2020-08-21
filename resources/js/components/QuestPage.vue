@@ -1,0 +1,47 @@
+<template>
+    <div>
+        <main role="main">
+
+            <section class="jumbotron text-center">
+                <div class="container">
+                    <h1 class="jumbotron-heading">{{task.title}}</h1>
+                </div>
+            </section>
+
+            <div class="album py-5 bg-light">
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card mb-4 box-shadow">
+                                <img class="card-img-top" :src="'storage/' + task.image" alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">{{task.description}}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                            <button type="button" class="btn btn-lg btn-outline-danger" @click="">Выполнять</button>
+                                            <a type="button" class="btn btn-lg btn-outline-success" href="response">Отправить ответ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</template>
+
+<script>
+export default {
+    name: "QuestPage",
+    props: ['task'],
+    data() {
+        return {
+        }
+    },
+    mounted() {
+        console.log(this.task)
+    }
+}
+</script>
