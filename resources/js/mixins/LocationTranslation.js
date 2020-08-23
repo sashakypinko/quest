@@ -17,10 +17,14 @@ export default {
             })
         },
         success(res) {
-            console.log('success: ', res)
+            let x = document.getElementById("demo");
+            console.log('success: ', res);
+            x.innerHTML = res.coords.latitude;
         },
         error(err) {
-            console.log('error: ', err)
+            let x = document.getElementById("demo");
+            console.log('error: ', err);
+            x.innerHTML = err.message;
         },
         getLocation() {
             /*  let self = this;
