@@ -30,7 +30,7 @@ class Response extends BaseModel
             'task_id' => Task::where('priority', Auth::user()->current_task)->first()->id,
             'image' => $image,
             'description' => $description
-        ]);
+        ])->id;
     }
 
     /**
@@ -47,5 +47,14 @@ class Response extends BaseModel
     public function task()
     {
         return $this->belongsTo('App\Models\Task');
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getResponses($id)
+    {
+        return $this->where('user_id', $id)->get()->sortByDesc('created_at');
     }
 }

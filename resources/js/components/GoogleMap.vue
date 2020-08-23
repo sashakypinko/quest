@@ -14,8 +14,8 @@
                 places: [],
                 key: 'AIzaSyClropSipck2WokfsQMiNoNuSWFMaLJcV0',
                 currentPlace: null,
-                longitude: parseFloat(this.lon),
-                latitude: parseFloat(this.lat),
+                longitude: this.lon ?? 35.07347334,
+                latitude: this.lat ?? 35.05734734,
                 myLat: '',
                 myLon: ''
             };
@@ -37,7 +37,7 @@
                         }
                     }
                 });
-            },
+            }
         },
         async mounted() {
             let self = this;
@@ -56,6 +56,7 @@
             }
 
             try {
+                console.log(this.latitude)
                 const google = await gmapsInit();
                 const map = new google.maps.Map(this.$el, {
                     zoom: 11,
@@ -85,6 +86,22 @@
             } catch (error) {
                 console.error(error);
             }
+
+            Echo.channel('quest_database_location')
+                .listen('.new-location', e => {
+                    let firstloc = new google.maps.Marker({
+                        clickable: false,
+                        icon: new google.maps.MarkerImage('//maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',
+                            new google.maps.Size(22,22),
+                            new google.maps.Point(0,18),
+                            new google.maps.Point(11,11)),
+                        shadow: null,
+                        animation: google.maps.Animation.DROP,
+                        zIndex: 999,
+                        map: map,
+                        position: {lat: e.lat, lng: e.lon}
+                    });
+                });
         }
     }
 </script>

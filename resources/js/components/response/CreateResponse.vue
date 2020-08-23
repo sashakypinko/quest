@@ -41,7 +41,7 @@ export default {
     name: "ResponseCreate",
     data() {
         return {
-            image: null,
+            image: '',
             imageData: '',
             description: '',
             success: false,
@@ -70,7 +70,7 @@ export default {
             formData.append('description', this.description);
 
 
-            axios.post('response/send', formData, config)
+            axios.post('send', formData, config)
                 .then(res => {
                     this.errors = {};
                     this.success = true;
@@ -85,11 +85,12 @@ export default {
                     });
                 })
                 .catch(error => {
+                    console.log(error.response.data);
                     this.errors = error.response.data.errors;
                     this.$notify({
                         group: 'notify',
                         title: 'Ошибка :(',
-                        text: error.response.data.errors.image[0] ?? error.response.data.errors.description[0],
+                        text: this.errors.image[0] ?? this.errors.description[0],
                         type: 'error',
                         width: '100%',
                         duration: '10000',

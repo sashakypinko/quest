@@ -3,8 +3,9 @@
 @section('content')
 
     <div>
-        <response-create
-        ></response-create>
+        <response-show
+            :users='@json($users)'
+        ></response-show>
     </div>
 
 @endsection
