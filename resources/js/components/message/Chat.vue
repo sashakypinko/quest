@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid h-100 chat-container">
-        <div class="row justify-content-center h-100">
+        <div class="row justify-content-center h-100" v-if="users.length > 0">
             <chats v-if="user.id !== 1"
                    :users="users"
             ></chats>
@@ -21,7 +21,7 @@
                     </div>
                     <div class="card-body msg_card_body">
 
-                        <div v-bind:class="`d-flex justify-content-${message.from_id == user.id ? 'start' : 'end'}`"
+                        <div v-bind:class="` ${(!message.is_read && message.from_id == user.id) ? 'is-unread' : ''} d-flex justify-content-${message.from_id == user.id ? 'start' : 'end'}`"
                              v-for="message in messages"
                              v-if="messages.length>0" class="message-container">
                             <div
@@ -35,7 +35,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="input-group">
-                            <textarea name="" class="form-control type_msg" v-model="message"
+                            <textarea name="" class="form-control type_msg" @keydown.enter="send" v-model="message"
                                       placeholder="Type your message..."></textarea>
                             <div class="input-group-append">
                                 <span class="input-group-text send_btn" @click="send"><i
@@ -50,71 +50,96 @@
 </template>
 
 <script>
-import {Bus} from '../../bus.js';
+    import {Bus} from '../../bus.js';
 
-export default {
-    name: "Chat",
-    props: ['user', 'users'],
-    data() {
-        return {
-            message: '',
-            messages: '',
-            errors: {}
-        }
-    },
-    methods: {
-        send() {
-            let config = {
-                    headers: {'content-type': 'multipart/form-data'}
-                },
-                formData = new FormData();
-
-            formData.append('user_id', this.user.id);
-            formData.append('message', this.message);
-
-            axios.post('/chat/send', formData, config)
-                .then((res) => {
-                })
-                .catch(error => {
-                    this.errors = error.response.data.errors;
-                });
+    export default {
+        name: "Chat",
+        props: ['user', 'users'],
+        data() {
+            return {
+                message: '',
+                messages: [],
+                chatId: null,
+                errors: {}
+            }
         },
-        getMessages() {
-            axios.post('/chat/get', {id: this.user.id})
-                .then((res) => {
-                    this.messages = res.data.messages;
+        methods: {
+            send() {
+                let config = {
+                        headers: {'content-type': 'multipart/form-data'}
+                    },
+                    formData = new FormData();
+
+                formData.append('user_id', this.user.id);
+                formData.append('message', this.message);
+
+                axios.post('/chat/send', formData, config)
+                    .then((res) => {
+                        this.message = '';
+                        this.setIsRead();
+                    })
+                    .catch(error => {
+                        this.errors = error.response.data.errors;
+                    });
+            },
+            getMessages() {
+                axios.post('/chat/get', {
+                    id: this.user.id,
+                })
+                    .then((res) => {
+                        if (Array.isArray(res.data.messages)) {
+                            this.messages = res.data.messages;
+                            this.chatId = this.messages[0].chat_id
+                        } else {
+                            this.chatId = res.data.messages.id;
+                        }
+
+                        this.startListenEvent();
+                        this.scrollDown();
+                    })
+                    .catch(error => {
+                        this.errors = error;
+                    });
+            },
+            scrollDown() {
+                setTimeout(() => $(".msg_card_body").first().scrollTop($(".msg_card_body")[0].scrollHeight), 50)
+            },
+            openChat(id) {
+                axios.post('/chat/get-user', {id: id})
+                    .then((res) => {
+                        this.user = res.data.user;
+
+                        this.getMessages();
+                    })
+                    .catch(error => {
+                        this.errors = error.response.data.errors;
+                    });
+            },
+            startListenEvent() {
+                Echo.channel('quest_database_chat_' + this.chatId)
+                    .listen('.send', e => {
+                        this.messages.push(e.message);
+                        this.scrollDown();
+                    });
+            },
+            setIsRead() {
+                $('.message-container').removeClass('is-unread');
+            }
+        },
+        mounted() {
+            if (this.users.length > 0) {
+                this.getMessages();
+
+                $(document).ready(() => {
                     this.scrollDown();
-                })
-                .catch(error => {
-                    this.errors = error.response.data.errors;
                 });
-        },
-        scrollDown() {
-            setTimeout(() => $(".msg_card_body").first().scrollTop($(".msg_card_body")[0].scrollHeight), 50)
-        },
-        openChat(id) {
-            axios.post('/chat/get-user', {id: id})
-                .then((res) => {
-                    this.user = res.data.user;
+            }
 
-                    this.getMessages();
-                })
-                .catch(error => {
-                    this.errors = error.response.data.errors;
-                });
-        }
-    },
-    mounted() {
-        this.getMessages();
-        Bus.$on('open-chat', id => {
-            this.openChat(id)
-        })
-
-        $(document).ready(() => {
-            this.scrollDown();
-        });
-    },
-}
+            Bus.$on('open-chat', id => {
+                this.openChat(id)
+            });
+        },
+    }
 </script>
 
 <style scoped>

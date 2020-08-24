@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\SendMessage;
 use App\Http\Requests\MessageRequest;
 use App\Http\Resource\Collection\MessageCollection;
 use App\Services\MessageService;
@@ -44,10 +45,13 @@ class MessageController extends Controller
      */
     public function send(MessageRequest $request)
     {
-        $this->service->sendMessage($request->message, $request->user_id);
+        $chat = $this->service->getChat($request->user_id);
+        $message = $this->service->sendMessage($request->message, $chat);
+        $this->service->setReaded($request->user_id);
+        event(new SendMessage($message, $chat->id));
 
         return response()->json([
-            'message' => $request->message
+            'message' => $message
         ]);
     }
 
@@ -56,6 +60,8 @@ class MessageController extends Controller
      */
     public function getMessages(Request $request)
     {
+        $this->service->setReaded($request->id);
+
         return response()->json([
             'messages' => $this->service->getMessages($request->id)
         ]);

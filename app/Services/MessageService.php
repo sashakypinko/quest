@@ -2,42 +2,68 @@
 
 namespace App\Services;
 
-use App\Models\Activity;
+use App\Models\Chat;
 use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class MessageService
 {
-    public $table = 'user_message';
 
     /**
      * @param $message
-     * @param $user_id
+     * @param $chat
+     * @return mixed
      */
-    public function sendMessage($message, $user_id)
+    public function sendMessage($message, $chat)
     {
-        $messageId = Message::create([
-            'message' => $message
-        ])->id;
-
-        DB::table($this->table)->insert([
-            'message_id' => $messageId,
+        return Message::create([
+            'chat_id' => $chat->id,
             'from_id' => Auth::user()->id,
-            'to_id' => $user_id,
-            'created_at' => now()
+            'message' => $message,
+        ]);
+
+    }
+
+    /**
+     * @param $userId
+     * @return mixed
+     */
+    public function getMessages($userId)
+    {
+        $chat = $this->getChat($userId);
+        $messages = Message::where('chat_id', $chat->id)->get();
+
+        return sizeof($messages) > 0 ? $messages : $chat;
+    }
+
+    /**
+     * @param $userId
+     * @return mixed
+     */
+    public function getChat($userId)
+    {
+        $ownId = Auth::user()->id;
+        $chat = Chat::chat($userId, $ownId)->first();
+
+        if ($chat) {
+            return $chat;
+        }
+
+        return Chat::create([
+            'owner_id' => $ownId,
+            'invited_id' => $userId,
         ]);
     }
 
-    public function getMessages($user_id)
+    /**
+     * @param $userId
+     */
+    public function setReaded($userId)
     {
-        return $this->getMessagesQuery($user_id)->get();
-    }
+        $chat = $this->getChat($userId);
 
-    public function getMessagesQuery($user_id)
-    {
-        $query = Message::join('user_message', 'user_message.message_id', '=', 'messages.id');
-
-        return $query->message($user_id);
+        Message::where('chat_id', $chat->id)->where('from_id', $userId)->update([
+            'is_read' => 1
+        ]);
     }
 }
