@@ -28,13 +28,14 @@
                                         <a type="button" class="btn btn-lg btn-outline-success btn-block"
                                            v-if="task.priority < count" href="../response/create">Отправить ответ</a>
                                     </div>
+                                    <a type="button" class="btn btn-lg btn-outline-primary btn-block mt-3"
+                                       href="/chat">Задать вопрос</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </main>
     </div>
 </template>

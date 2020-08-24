@@ -22,7 +22,6 @@ export default {
                     },
                 })
             } else {
-                // console.log('loading all of them')
                 resolve({
                     data: {
                         resources,

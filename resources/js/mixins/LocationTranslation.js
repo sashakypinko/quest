@@ -18,12 +18,10 @@ export default {
         },
         success(res) {
             let x = document.getElementById("demo");
-            console.log('success: ', res);
             x.innerHTML = res.coords.latitude;
         },
         error(err) {
             let x = document.getElementById("demo");
-            console.log('error: ', err);
             x.innerHTML = err.message;
         },
         getLocation() {
@@ -33,11 +31,9 @@ export default {
                   url: 'https://cors-anywhere.herokuapp.com/https://www.googleapis.com/geolocation/v1/geolocate?key=' + self.key,
                   type: 'POST',
                   success: r => {
-                      console.log(r);
                       self.sendLocation(r.location.lat, r.location.lng)
                   }
               }); */
-            console.log('started');
             let x = document.getElementById("demo");
 
             if (navigator.geolocation) {

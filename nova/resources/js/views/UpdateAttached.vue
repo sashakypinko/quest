@@ -347,7 +347,6 @@ export default {
      */
     selectResourceFromSelectControl(e) {
       this.selectedResourceId = e.target.value
-      console.log(e.target.value, this.selectedResourceId)
       this.selectInitialResource()
     },
 

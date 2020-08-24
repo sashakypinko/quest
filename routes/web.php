@@ -22,6 +22,8 @@ Route::prefix('chat')->name('chat.')->middleware('auth')->group(function () {
     Route::get('', 'MessageController@index')->name('index');
     Route::get('list', 'MessageController@list')->name('list');
     Route::post('send', 'MessageController@send')->name('send');
+    Route::post('get', 'MessageController@getMessages')->name('get');
+    Route::post('get-user', 'MessageController@getUser')->name('get-user');
 });
 
 Route::post('send-location', 'GoogleMapController@sendLocation')->name('send-location');

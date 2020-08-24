@@ -72,16 +72,13 @@
             getResponses() {
                 axios.post('response/get', {id: this.activeBtn.id})
                     .then((res) => {
-                        console.log(res.data.responses);
                         this.responses = res.data.responses;
                     })
                     .catch(error => {
                         this.errors = error.response.data.errors;
-                        console.log(this.errors);
                     });
             },
             openResponse() {
-                console.log('It is work')
             }
         },
         mounted() {

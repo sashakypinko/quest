@@ -4,6 +4,7 @@
 
     <chat
         :user='@json($user)'
+        :users='@json($users)'
         ></chat>
 
 @endsection

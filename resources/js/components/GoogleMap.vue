@@ -56,7 +56,6 @@
             }
 
             try {
-                console.log(this.latitude)
                 const google = await gmapsInit();
                 const map = new google.maps.Map(this.$el, {
                     zoom: 11,
