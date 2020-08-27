@@ -26,9 +26,6 @@ Vue.component('response-create', require('./components/response/CreateResponse.v
 Vue.component('response-show', require('./components/response/ShowResponses.vue').default);
 Vue.component('quest', require('./components/quest/Quest.vue').default);
 Vue.component('google-map', require('./components/GoogleMap.vue').default);
-Vue.component('g-map', require('./components/Gmap.vue').default);
-Vue.component('chat', require('./components/message/Chat').default);
-Vue.component('chats', require('./components/message/Chats').default);
 
 const app = new Vue({
     el: '#app',

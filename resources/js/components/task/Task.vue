@@ -24,12 +24,9 @@
                                     >
                                     </google-map>
                                     <div class="d-flex justify-content-between align-items-center mt-4">
-                                        <!--                                            <button type="button" class="btn btn-lg btn-outline-danger" @click="">Выполнять</button>-->
                                         <a type="button" class="btn btn-lg btn-outline-success btn-block"
                                            v-if="task.priority < count" href="../response/create">Отправить ответ</a>
                                     </div>
-                                    <a type="button" class="btn btn-lg btn-outline-primary btn-block mt-3"
-                                       href="/chat">Задать вопрос</a>
                                 </div>
                             </div>
                         </div>
@@ -41,17 +38,12 @@
 </template>
 
 <script>
-    import LocationTranslation from '../../mixins/LocationTranslation';
 
     export default {
         name: "Task",
         props: ['task', 'count'],
         data() {
             return {}
-        },
-        mounted() {
-            this.getLocation();
-        },
-        mixins: [LocationTranslation]
+        }
     }
 </script>

@@ -83,19 +83,6 @@
         },
         mounted() {
             this.getResponses();
-
-            Echo.channel('quest_database_response')
-                .listen('.new-response', e => {
-                    this.$notify({
-                        group: 'notify',
-                        title: 'Есть новый ответ!',
-                        text: 'Чтоб увидеть, обновите страницу.',
-                        type: 'warn',
-                        width: '100%',
-                        duration: '20000',
-                        closeOnClick: false
-                    });
-                });
         },
         components: {}
     }

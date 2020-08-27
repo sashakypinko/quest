@@ -24,14 +24,8 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "laravel-echo": "^1.8.1",
-        "pusher-js": "^7.0.0",
-        "socket.io": "^2.3.0",
-        "socket.io-client": "^2.3.0",
-        "v-toaster": "^1.0.3",
         "velocity-animate": "^1.5.2",
         "vue-moment": "^4.1.0",
-        "vue-moments-ago": "^0.2.0",
         "vue-notification": "^1.3.20",
         "vue-timeago": "^5.1.2",
         "vue-toastification": "^1.7.6"

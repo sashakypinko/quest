@@ -13,14 +13,10 @@
                 </div>
             </header>
 
-            <!--            <div class="jumbotron text-white rounded bg-dark">-->
             <div class="col-md-6 px-0">
-                <!--                    <h1 class="display-4 font-italic">{{ section_top.title }}</h1>-->
-                <!--                    <p class="lead my-3">{{ section_top.content }}</p>-->
                 <img :src="image" class="quest-img" :alt="image"/>
             </div>
         </div>
-        <!--        </div>-->
 
         <main role="main" class="container">
             <div class="row">
@@ -38,21 +34,21 @@
 </template>
 
 <script>
-    export default {
-        name: "Quest",
-        props: ['data'],
-        data() {
-            return {
-                title: this.data.main_title,
-                image: 'storage/' + this.data.image,
-                section_bottom: {
-                    title: this.data.bottom_title,
-                    content: this.data.bottom_content
-                },
-            }
-        },
-        methods: {},
-        mounted() {
+export default {
+    name: "Quest",
+    props: ['data'],
+    data() {
+        return {
+            title: this.data.main_title,
+            image: 'storage/' + this.data.image,
+            section_bottom: {
+                title: this.data.bottom_title,
+                content: this.data.bottom_content
+            },
         }
+    },
+    methods: {},
+    mounted() {
     }
+}
 </script>
