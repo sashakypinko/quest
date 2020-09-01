@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\ResponseEvent;
 use App\Http\Requests\ResponseRequest;
 use App\Http\Resource\Collection\ResponseCollection;
 use App\Models\Response;
@@ -52,7 +51,6 @@ class ResponseController extends Controller
         $image = $this->model->saveFile($request->image);
         $id = $this->model->send($image, $request->description);
         $user->setNextTask();
-        event(new ResponseEvent($id));
 
         return response()->json([
             'message' => 'Ответ успешно отправлен. Приступайте к следующему заданию!'
