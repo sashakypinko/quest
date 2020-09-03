@@ -14,8 +14,8 @@
                 places: [],
                 key: 'AIzaSyClropSipck2WokfsQMiNoNuSWFMaLJcV0',
                 currentPlace: null,
-                longitude: parseFloat(this.lon),
-                latitude: parseFloat(this.lat),
+                longitude: this.lon,
+                latitude: this.lat,
                 myLat: '',
                 myLon: ''
             };

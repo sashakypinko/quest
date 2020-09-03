@@ -18,4 +18,3 @@ Route::prefix('task')->name('task.')->middleware('auth')->group(function () {
 });
 
 Auth::routes();
-

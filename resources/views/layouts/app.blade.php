@@ -27,7 +27,7 @@
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="images/logo.png" style="width: 40px"/>
+                <img src="/images/logo.png" style="width: 40px"/>
                 {{ config('app.name', 'Laravel') }}
             </a>
             @if(Auth::user())
