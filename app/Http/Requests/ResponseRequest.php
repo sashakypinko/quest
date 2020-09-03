@@ -25,7 +25,7 @@ class ResponseRequest extends FormRequest
     {
         return [
             'image' => 'required|mimes:jpeg,jpg,png',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
         ];
     }
 }
