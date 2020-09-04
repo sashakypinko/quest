@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div class="vld-parent">
+            <loading :active.sync="isLoading"></loading>
+        </div>
         <notifications group="notify"/>
         <div class="col-md-8 order-md-1 mt-5">
             <h4 class="mb-3">Ваш ответ</h4>
@@ -37,6 +40,9 @@
     </div>
 </template>
 <script>
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+
 export default {
     name: "ResponseCreate",
     data() {
@@ -44,8 +50,12 @@ export default {
             image: '',
             imageData: '',
             description: '',
+
             success: false,
-            errors: {}
+
+            errors: {},
+
+            isLoading: false,
         }
     },
     methods: {
@@ -61,6 +71,8 @@ export default {
             }
         },
         send() {
+            this.startLoading();
+
             let config = {
                     headers: {'content-type': 'multipart/form-data'}
                 },
@@ -83,6 +95,8 @@ export default {
                         duration: '10000',
                         position: 'top-center'
                     });
+
+                    this.endLoading();
                 })
                 .catch(error => {
                     this.errors = error.response.data.errors;
@@ -95,9 +109,19 @@ export default {
                         duration: '10000',
                         position: 'top-center'
                     });
+
+                    this.endLoading();
                 });
-        }
+        },
+        startLoading() {
+            this.isLoading = true;
+        },
+        endLoading() {
+            this.isLoading = false;
+        },
     },
-    components: {}
+    components: {
+        Loading
+    }
 }
 </script>

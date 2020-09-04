@@ -7,6 +7,7 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
 
@@ -60,6 +61,9 @@ class User extends Resource
                 ->rules('required', 'max:255'),
 
             Text::make('Email')
+                ->sortable(),
+
+            Number::make('Current Task')
                 ->sortable(),
 
             Password::make('Password')
