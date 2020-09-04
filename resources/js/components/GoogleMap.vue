@@ -14,8 +14,8 @@
                 places: [],
                 key: 'AIzaSyClropSipck2WokfsQMiNoNuSWFMaLJcV0',
                 currentPlace: null,
-                longitude: this.lon,
-                latitude: this.lat,
+                longitude: parseFloat(this.lon),
+                latitude: parseFloat(this.lat),
                 myLat: '',
                 myLon: ''
             };
@@ -30,7 +30,6 @@
                     success: r => {
                         self.myLat = r.location.lat;
                         self.myLon = r.location.lng;
-                        console.log('Google location: ', r.location)
                     },
                     fail: (data, status) => {
                         if (callback) {

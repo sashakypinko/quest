@@ -1943,8 +1943,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       places: [],
       key: 'AIzaSyClropSipck2WokfsQMiNoNuSWFMaLJcV0',
       currentPlace: null,
-      longitude: this.lon,
-      latitude: this.lat,
+      longitude: parseFloat(this.lon),
+      latitude: parseFloat(this.lat),
       myLat: '',
       myLon: ''
     };
@@ -1958,7 +1958,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         success: function success(r) {
           self.myLat = r.location.lat;
           self.myLon = r.location.lng;
-          console.log('Google location: ', r.location);
         },
         fail: function fail(data, status) {
           if (callback) {
